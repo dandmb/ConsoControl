@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Rappel(
     @SerialName("results")
-    val results: List<Article>,
+    val results: List<Product>,
     @SerialName("total_count")
     val totalCount: Int
 )

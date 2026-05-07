@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Article(
+data class Product(
     @SerialName("categorie_produit")
     val categorieProduit: String,
     @SerialName("conditionnements")
