@@ -1,0 +1,30 @@
+package com.dmb25.consoprotection.domain.model
+
+data class Product(
+    val categorieProduit: String,
+    val conduitesATenirParLeConsommateur: String,
+    val dateDateFinCommercialisation: String,
+    val dateDeFinDeLaProcedureDeRappel: String,
+    val dateDebutCommercialisation: String,
+    val datePublication: String,
+    val descriptionComplementaireRisque: String,
+    val distributeurs: String,
+    val gtin: Long,
+    val id: Int,
+    val identificationProduits: String,
+    val informationsComplementaires: String,
+    val libelle: String,
+    val lienVersAffichettePdf: String,
+    val lienVersLaFicheRappel: String,
+    val lienVersLaListeDesDistributeurs: String,
+    val liensVersLesImages: String,
+    val marqueProduit: String,
+    val modalitesDeCompensation: String,
+    val modelesOuReferences: String,
+    val motifRappel: String,
+    val numeroContact: String?,
+    val preconisationsSanitaires: String,
+    val rappelGuid: String,
+    val risquesEncourus: String,
+    val zoneGeographiqueDeVente: String
+)
