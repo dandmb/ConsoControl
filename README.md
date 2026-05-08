@@ -1,4 +1,4 @@
-<h1 align="center">📦 RappelConso KMP</h1>
+<h1 align="center">📦 RappelConso KMP (Under development)</h1>
 
 <p align="center">
 Application mobile Kotlin Multiplatform permettant de consulter les rappels produits de l’API officielle RappelConso.
@@ -49,5 +49,19 @@ shared/        → logique métier commune
 androidApp/    → application Android
 iosApp/        → application iOS
 </pre>
+
+---
+
+<h2>🌐 API utilisée</h2>
+
+<p>
+Cette application utilise les données publiques de l’API officielle RappelConso :
+</p>
+
+<p>
+<a href="https://rappel.conso.gouv.fr/" target="_blank">
+https://rappel.conso.gouv.fr/
+</a>
+</p>
 
 ---
