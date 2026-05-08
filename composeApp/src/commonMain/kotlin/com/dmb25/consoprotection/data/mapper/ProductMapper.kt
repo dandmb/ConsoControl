@@ -1,0 +1,42 @@
+package com.dmb25.consoprotection.data.mapper
+
+import com.dmb25.consoprotection.data.local.entity.ProductEntity
+import com.dmb25.consoprotection.data.remote.dto.ProductDto
+
+fun ProductDto.toEntity(): ProductEntity = ProductEntity(
+    id = id,
+    gtin = gtin,
+    numeroFiche = numeroFiche,
+    numeroVersion = numeroVersion,
+    natureJuridiqueRappel = natureJuridiqueRappel,
+    categorieProduit = categorieProduit,
+    sousCategorieProduit = sousCategorieProduit,
+    marqueProduit = marqueProduit,
+    libelle = libelle,
+    modelesOuReferences = modelesOuReferences,
+    identificationProduits = identificationProduits,
+    conditionnements = conditionnements,
+    dateDebutCommercialisation = dateDebutCommercialisation,
+    dateDateFinCommercialisation = dateDateFinCommercialisation,
+    temperatureConservation = temperatureConservation,
+    marqueSalubrite = marqueSalubrite,
+    informationsComplementaires = informationsComplementaires,
+    zoneGeographiqueDeVente = zoneGeographiqueDeVente,
+    distributeurs = distributeurs,
+    motifRappel = motifRappel,
+    risquesEncourus = risquesEncourus,
+    preconisationsSanitaires = preconisationsSanitaires,
+    descriptionComplementaireRisque = descriptionComplementaireRisque,
+    conduitesATenirParLeConsommateur = conduitesATenirParLeConsommateur,
+    numeroContact = numeroContact,
+    modalitesDeCompensation = modalitesDeCompensation,
+    dateDeFinDeLaProcedureDeRappel = dateDeFinDeLaProcedureDeRappel,
+    informationsComplementairesPubliques = informationsComplementairesPubliques,
+    liensVersLesImages = liensVersLesImages,
+    lienVersLaListeDesProduits = lienVersLaListeDesProduits,
+    lienVersLaListeDesDistributeurs = lienVersLaListeDesDistributeurs,
+    lienVersAffichettePdf = lienVersAffichettePdf,
+    lienVersLaFicheRappel = lienVersLaFicheRappel,
+    rappelGuid = rappelGuid,
+    datePublication = datePublication,
+)

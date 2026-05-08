@@ -2,7 +2,7 @@ package com.dmb25.consoprotection.presentation.ui.product_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dmb25.consoprotection.data.model.Product
+import com.dmb25.consoprotection.data.remote.dto.ProductDto
 import com.dmb25.consoprotection.domain.repository.RecallRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -15,7 +15,7 @@ class ProductListViewModel(
     val repository: RecallRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<List<Product>>>(UiState.Idle)
+    private val _uiState = MutableStateFlow<UiState<List<ProductDto>>>(UiState.Idle)
     val uiState = _uiState.asStateFlow()
 
     init {

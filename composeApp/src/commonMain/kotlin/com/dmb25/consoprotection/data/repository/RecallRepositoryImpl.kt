@@ -1,6 +1,6 @@
 package com.dmb25.consoprotection.data.repository
 
-import com.dmb25.consoprotection.data.model.Product
+import com.dmb25.consoprotection.data.remote.dto.ProductDto
 import com.dmb25.consoprotection.data.remote.ApiService
 import com.dmb25.consoprotection.domain.repository.RecallRepository
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,7 @@ class RecallRepositoryImpl(
         limit: Int,
         offset: Int,
         orderBy: String
-    ): Flow<List<Product>> = flow {
+    ): Flow<List<ProductDto>> = flow {
         val data = apiService.getRecalls()
         emit(data)
     }
