@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Rappel(
+data class RecallResponse(
     @SerialName("results")
     val results: List<Product>,
     @SerialName("total_count")

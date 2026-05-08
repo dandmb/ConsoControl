@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dmb25.consoprotection.domain.model.Product
+import com.dmb25.consoprotection.data.model.Product
 
 @Composable
 fun ProductListContent(
