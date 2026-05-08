@@ -1,0 +1,252 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "a685d6bd37e57081b3de2c1f3db05ee4",
+    "entities": [
+      {
+        "tableName": "products",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `gtin` INTEGER NOT NULL, `numeroFiche` TEXT NOT NULL, `numeroVersion` INTEGER NOT NULL, `natureJuridiqueRappel` TEXT NOT NULL, `categorieProduit` TEXT NOT NULL, `sousCategorieProduit` TEXT NOT NULL, `marqueProduit` TEXT NOT NULL, `libelle` TEXT NOT NULL, `modelesOuReferences` TEXT NOT NULL, `identificationProduits` TEXT NOT NULL, `conditionnements` TEXT, `dateDebutCommercialisation` TEXT, `dateDateFinCommercialisation` TEXT, `temperatureConservation` TEXT, `marqueSalubrite` TEXT, `informationsComplementaires` TEXT, `zoneGeographiqueDeVente` TEXT NOT NULL, `distributeurs` TEXT NOT NULL, `motifRappel` TEXT NOT NULL, `risquesEncourus` TEXT NOT NULL, `preconisationsSanitaires` TEXT, `descriptionComplementaireRisque` TEXT, `conduitesATenirParLeConsommateur` TEXT NOT NULL, `numeroContact` TEXT, `modalitesDeCompensation` TEXT NOT NULL, `dateDeFinDeLaProcedureDeRappel` TEXT, `informationsComplementairesPubliques` TEXT, `liensVersLesImages` TEXT NOT NULL, `lienVersLaListeDesProduits` TEXT, `lienVersLaListeDesDistributeurs` TEXT, `lienVersAffichettePdf` TEXT NOT NULL, `lienVersLaFicheRappel` TEXT NOT NULL, `rappelGuid` TEXT NOT NULL, `datePublication` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gtin",
+            "columnName": "gtin",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numeroFiche",
+            "columnName": "numeroFiche",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numeroVersion",
+            "columnName": "numeroVersion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "natureJuridiqueRappel",
+            "columnName": "natureJuridiqueRappel",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categorieProduit",
+            "columnName": "categorieProduit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sousCategorieProduit",
+            "columnName": "sousCategorieProduit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "marqueProduit",
+            "columnName": "marqueProduit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "libelle",
+            "columnName": "libelle",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modelesOuReferences",
+            "columnName": "modelesOuReferences",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "identificationProduits",
+            "columnName": "identificationProduits",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "conditionnements",
+            "columnName": "conditionnements",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "dateDebutCommercialisation",
+            "columnName": "dateDebutCommercialisation",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "dateDateFinCommercialisation",
+            "columnName": "dateDateFinCommercialisation",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "temperatureConservation",
+            "columnName": "temperatureConservation",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "marqueSalubrite",
+            "columnName": "marqueSalubrite",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "informationsComplementaires",
+            "columnName": "informationsComplementaires",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "zoneGeographiqueDeVente",
+            "columnName": "zoneGeographiqueDeVente",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "distributeurs",
+            "columnName": "distributeurs",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "motifRappel",
+            "columnName": "motifRappel",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "risquesEncourus",
+            "columnName": "risquesEncourus",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "preconisationsSanitaires",
+            "columnName": "preconisationsSanitaires",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "descriptionComplementaireRisque",
+            "columnName": "descriptionComplementaireRisque",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "conduitesATenirParLeConsommateur",
+            "columnName": "conduitesATenirParLeConsommateur",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numeroContact",
+            "columnName": "numeroContact",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "modalitesDeCompensation",
+            "columnName": "modalitesDeCompensation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateDeFinDeLaProcedureDeRappel",
+            "columnName": "dateDeFinDeLaProcedureDeRappel",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "informationsComplementairesPubliques",
+            "columnName": "informationsComplementairesPubliques",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "liensVersLesImages",
+            "columnName": "liensVersLesImages",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lienVersLaListeDesProduits",
+            "columnName": "lienVersLaListeDesProduits",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "lienVersLaListeDesDistributeurs",
+            "columnName": "lienVersLaListeDesDistributeurs",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "lienVersAffichettePdf",
+            "columnName": "lienVersAffichettePdf",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lienVersLaFicheRappel",
+            "columnName": "lienVersLaFicheRappel",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rappelGuid",
+            "columnName": "rappelGuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "datePublication",
+            "columnName": "datePublication",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "sync_metadata",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `totalRemoteCount` INTEGER NOT NULL, `totalLocalCount` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalRemoteCount",
+            "columnName": "totalRemoteCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalLocalCount",
+            "columnName": "totalLocalCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a685d6bd37e57081b3de2c1f3db05ee4')"
+    ]
+  }
+}
