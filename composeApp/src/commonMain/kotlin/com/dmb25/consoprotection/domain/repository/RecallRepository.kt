@@ -1,6 +1,6 @@
 package com.dmb25.consoprotection.domain.repository
 
-import com.dmb25.consoprotection.data.model.Product
+import com.dmb25.consoprotection.data.remote.dto.ProductDto
 import kotlinx.coroutines.flow.Flow
 
 interface RecallRepository {
@@ -8,5 +8,5 @@ interface RecallRepository {
         limit: Int = 20,
         offset: Int = 0,
         orderBy: String = "date_publication DESC"
-    ) : Flow<List<Product>>
+    ) : Flow<List<ProductDto>>
 }

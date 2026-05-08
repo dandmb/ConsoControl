@@ -8,20 +8,20 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dmb25.consoprotection.data.model.Product
+import com.dmb25.consoprotection.data.remote.dto.ProductDto
 
 @Composable
 fun ProductListContent(
-    products: List<Product>,
+    productDtos: List<ProductDto>,
 ){
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.fillMaxSize()
     ) {
-        items(products) { product ->
+        items(productDtos) { product ->
             ProductItem(
-                product = product,
+                productDto = product,
             )
         }
     }

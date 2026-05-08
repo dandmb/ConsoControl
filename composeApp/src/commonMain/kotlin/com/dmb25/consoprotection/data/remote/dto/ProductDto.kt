@@ -1,11 +1,11 @@
-package com.dmb25.consoprotection.data.model
+package com.dmb25.consoprotection.data.remote.dto
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Product(
+data class ProductDto(
     @SerialName("categorie_produit")
     val categorieProduit: String,
     @SerialName("conditionnements")
