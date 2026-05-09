@@ -1,12 +1,12 @@
 package com.dmb25.consoprotection.domain.repository
 
-import com.dmb25.consoprotection.data.remote.dto.ProductDto
+import com.dmb25.consoprotection.domain.model.Product
 import kotlinx.coroutines.flow.Flow
 
 interface RecallRepository {
-    suspend fun getRecalls(
-        limit: Int = 20,
-        offset: Int = 0,
-        orderBy: String = "date_publication DESC"
-    ) : Flow<List<ProductDto>>
+    fun getRecalls(): Flow<List<Product>>
+    suspend fun fetchAndSave(offset: Int)
+    suspend fun canLoadMore(): Boolean
+    suspend fun getCurrentOffset(): Int
+    suspend fun searchRecalls(query: String): List<Product>
 }

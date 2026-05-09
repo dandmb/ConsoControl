@@ -1,5 +1,6 @@
 package com.dmb25.consoprotection.di
 
+import com.dmb25.consoprotection.data.local.AppDatabase
 import com.dmb25.consoprotection.data.remote.ApiService
 import com.dmb25.consoprotection.data.repository.RecallRepositoryImpl
 import com.dmb25.consoprotection.domain.repository.RecallRepository
@@ -29,7 +30,10 @@ val dataModule = module {
         }
     }
 
-    single<RecallRepository> { RecallRepositoryImpl(get()) }
+    single { get<AppDatabase>().productDao() }
+    single { get<AppDatabase>().syncMetadataDao() }
+
+    single<RecallRepository> { RecallRepositoryImpl(get(), get(), get()) }
 
     single { ApiService(get()) }
 
