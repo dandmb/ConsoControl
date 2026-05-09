@@ -15,14 +15,14 @@ class ApiService(
         limit: Int = 20,
         offset: Int = 0,
         orderBy: String = "date_publication DESC"
-    ): List<ProductDto> {
+    ): RecallResponseDto {
         return httpClient.get("rappelconso-v2-gtin-trie/records") {
             url {
                 encodedParameters.append("order_by", "date_publication DESC".encodeURLParameter())
                 encodedParameters.append("limit", limit.toString())
                 encodedParameters.append("offset", offset.toString())
             }
-        }.body<RecallResponseDto>().results
+        }.body()
     }
 
     suspend fun getRecallsByCategorie(
@@ -41,12 +41,12 @@ class ApiService(
     suspend fun searchRecalls(
         query: String,
         limit: Int = 20
-    ): List<ProductDto> {
+    ): RecallResponseDto {
         return httpClient.get("/records") {
             parameter("limit", limit)
             parameter("order_by", "date_publication DESC")
             parameter("where", "search(*, '$query')")
-        }.body<RecallResponseDto>().results
+        }.body()
     }
 
 
