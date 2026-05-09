@@ -74,11 +74,12 @@ internal fun ProductListScreen(
     viewModel: ProductListViewModel = koinViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isLoadingMore by viewModel.isLoadingMore.collectAsStateWithLifecycle()
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-    ){
+    ) {
         when (val state = uiState) {
             is UiState.Loading -> {
                 CircularProgressIndicator(
@@ -88,7 +89,9 @@ internal fun ProductListScreen(
 
             is UiState.Success -> {
                 ProductListContent(
-                    product = state.data
+                    product = state.data,
+                    isLoadingMore = isLoadingMore,
+                    onLoadMore = { viewModel.fetchNextPage() }
                 )
             }
 

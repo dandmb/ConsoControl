@@ -1,7 +1,9 @@
 package com.dmb25.consoprotection.domain.model
 
+import androidx.compose.runtime.Immutable
 
 
+@Immutable
 data class Product(
     val id: Int,
     val gtin: Long,
