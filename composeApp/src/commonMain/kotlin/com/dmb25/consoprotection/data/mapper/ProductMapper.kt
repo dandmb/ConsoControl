@@ -33,6 +33,24 @@ fun String?.splitPipeOrNull(): List<String>? =
 fun String?.splitAntoineOrNull(): List<String>? =
     this?.split("¤")?.map { it.trim() }?.filter { it.isNotBlank() }?.takeIf { it.isNotEmpty() }
 
+fun String.capitalize() = replaceFirstChar { it.uppercase() }
+
+fun String.toFormattedDate(): String {
+    val parts = this.split("T")
+    val datePart = parts[0].split("-")
+    val timePart = parts[1].split("+")[0].split(":")
+
+    val year = datePart[0]
+    val month = datePart[1]
+    val day = datePart[2]
+
+    val hour = timePart[0]
+    val minute = timePart[1]
+    val second = timePart[2]
+
+    return "$hour:$minute:$second - $day/$month/$year"
+}
+
 fun ProductDto.toEntity(): ProductEntity = ProductEntity(
     id = id,
     gtin = gtin,
@@ -80,7 +98,7 @@ fun ProductEntity.toModel(): Product = Product(
     categorieProduit = categorieProduit,
     sousCategorieProduit = sousCategorieProduit,
     marqueProduit = marqueProduit,
-    libelle = libelle,
+    libelle = libelle.uppercase(),
     modelesOuReferences = modelesOuReferences.splitAntoine(),
     identificationProduits = identificationProduits.toIdentificationProduits(),
     conditionnements = conditionnements.splitAntoineOrNull(),
@@ -91,7 +109,7 @@ fun ProductEntity.toModel(): Product = Product(
     informationsComplementaires = informationsComplementaires,
     zoneGeographiqueDeVente = zoneGeographiqueDeVente.splitPipe(),
     distributeurs = distributeurs.splitPipe().flatMap { it.splitAntoine() },
-    motifRappel = motifRappel,
+    motifRappel = motifRappel.capitalize(),
     risquesEncourus = risquesEncourus,
     preconisationsSanitaires = preconisationsSanitaires,
     descriptionComplementaireRisque = descriptionComplementaireRisque,
@@ -106,5 +124,5 @@ fun ProductEntity.toModel(): Product = Product(
     lienVersAffichettePdf = lienVersAffichettePdf,
     lienVersLaFicheRappel = lienVersLaFicheRappel,
     rappelGuid = rappelGuid,
-    datePublication = datePublication,
+    datePublication = datePublication.toFormattedDate(),
 )
