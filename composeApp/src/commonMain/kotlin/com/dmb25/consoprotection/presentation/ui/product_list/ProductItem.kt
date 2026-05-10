@@ -28,7 +28,8 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun ProductItem(
     product: Product,
-) {
+    modifier: Modifier = Modifier,
+    ) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
