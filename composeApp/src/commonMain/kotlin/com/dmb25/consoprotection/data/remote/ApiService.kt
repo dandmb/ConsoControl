@@ -14,7 +14,6 @@ class ApiService(
     suspend fun getRecalls(
         limit: Int = 20,
         offset: Int = 0,
-        orderBy: String = "date_publication DESC"
     ): RecallResponseDto {
         return httpClient.get("rappelconso-v2-gtin-trie/records") {
             url {
@@ -38,14 +37,16 @@ class ApiService(
         }.body<RecallResponseDto>().results
     }
 
-    suspend fun searchRecalls(
-        query: String,
-        limit: Int = 20
-    ): RecallResponseDto {
-        return httpClient.get("/records") {
-            parameter("limit", limit)
-            parameter("order_by", "date_publication DESC")
-            parameter("where", "search(*, '$query')")
+    suspend fun searchRecalls(query: String): RecallResponseDto {
+        return httpClient.get("rappelconso-v2-gtin-trie/records") {
+            url {
+                encodedParameters.append(
+                    "where",
+                    "search(libelle,'$query') or search(motif_rappel,'$query')".encodeURLParameter()
+                )
+                encodedParameters.append("limit", "100")
+                encodedParameters.append("order_by", "date_publication DESC".encodeURLParameter())
+            }
         }.body()
     }
 
