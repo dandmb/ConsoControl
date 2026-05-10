@@ -3,21 +3,27 @@ package com.dmb25.consoprotection.presentation.ui.product_list
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DockedSearchBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -33,6 +39,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 internal fun ProductListScreen(
@@ -40,52 +47,74 @@ internal fun ProductListScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val isLoadingMore by viewModel.isLoadingMore.collectAsStateWithLifecycle()
-
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
-    val searchResults by viewModel.searchResults.collectAsStateWithLifecycle()
     val isSearching by viewModel.isSearching.collectAsStateWithLifecycle()
-
+    val categories by viewModel.categories.collectAsStateWithLifecycle()
+    val selectedCategory by viewModel.selectedCategory.collectAsStateWithLifecycle()
+    val filteredProducts by viewModel.filteredProducts.collectAsStateWithLifecycle()
 
     Column(modifier = Modifier.fillMaxSize()) {
 
-        TextField(
-            value = searchQuery,
-            onValueChange = { viewModel.onSearchQueryChanged(it) },
-            placeholder = { Text(text = stringResource(Res.string.search_product)) },
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-            trailingIcon = {
-                if (searchQuery.isNotBlank()) {
-                    IconButton(onClick = { viewModel.onSearchQueryChanged("") }) {
-                        Icon(Icons.Default.Clear, contentDescription = null)
+        DockedSearchBar(
+            inputField = {
+                SearchBarDefaults.InputField(
+                    query = searchQuery,
+                    onQueryChange = { viewModel.onSearchQueryChanged(it) },
+                    onSearch = { },
+                    expanded = false,
+                    onExpandedChange = { },
+                    placeholder = { Text(stringResource(Res.string.search_product)) },
+                    leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                    trailingIcon = {
+                        if (searchQuery.isNotBlank()) {
+                            IconButton(onClick = {
+                                viewModel.onSearchQueryChanged("")
+                            }) {
+                                Icon(Icons.Default.Clear, contentDescription = null)
+                            }
+                        }
                     }
-                }
+                )
             },
-            singleLine = true,
+            expanded = false,
+            onExpandedChange = { },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
-        )
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+        ) { }
+
+        if (!isSearching && categories.isNotEmpty()) {
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+            ) {
+                items(categories) { category ->
+                    FilterChip(
+                        selected = selectedCategory == category,
+                        onClick = { viewModel.onCategorySelected(category) },
+                        label = { Text(category.replaceFirstChar { it.uppercase() }) }
+                    )
+                }
+            }
+        }
 
         Box(modifier = Modifier.fillMaxSize()) {
             when {
-
-                searchQuery.isNotBlank() && isSearching -> {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                }
-
-                searchQuery.isNotBlank() && searchResults.isEmpty() -> {
-                    Text(
-                        text = "Aucun résultat pour \"$searchQuery\"",
-                        modifier = Modifier.align(Alignment.Center).padding(16.dp),
-                        textAlign = TextAlign.Center
+                isSearching -> {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
                     )
                 }
-
-                searchQuery.isNotBlank() -> {
-                    ProductListContent(
-                        product = searchResults,
-                        isLoadingMore = false,
-                        onLoadMore = {}
+                searchQuery.isNotBlank() && filteredProducts.isEmpty() -> {
+                    Text(
+                        text = "Aucun résultat pour \"$searchQuery\"",
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .padding(16.dp),
+                        textAlign = TextAlign.Center
                     )
                 }
                 else -> {
@@ -95,15 +124,13 @@ internal fun ProductListScreen(
                                 modifier = Modifier.align(Alignment.Center)
                             )
                         }
-
                         is UiState.Success -> {
                             ProductListContent(
-                                product = state.data,
+                                product = filteredProducts,
                                 isLoadingMore = isLoadingMore,
                                 onLoadMore = { viewModel.fetchNextPage() }
                             )
                         }
-
                         is UiState.Error -> {
                             Column(
                                 modifier = Modifier
@@ -112,10 +139,7 @@ internal fun ProductListScreen(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
-                                Text(
-                                    text = "😕",
-                                    fontSize = 48.sp
-                                )
+                                Text(text = "😕", fontSize = 48.sp)
                                 Spacer(modifier = Modifier.height(16.dp))
                                 Text(
                                     text = state.message,
@@ -129,7 +153,6 @@ internal fun ProductListScreen(
                                 }
                             }
                         }
-
                         else -> {}
                     }
                 }
