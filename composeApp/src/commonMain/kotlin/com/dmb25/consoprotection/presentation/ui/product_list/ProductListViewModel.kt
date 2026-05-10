@@ -10,7 +10,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 import com.dmb25.consoprotection.domain.model.Product
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 
+@OptIn(FlowPreview::class)
 class ProductListViewModel(
     private val repository: RecallRepository
 ) : ViewModel() {
@@ -27,11 +31,14 @@ class ProductListViewModel(
     private val _isSearching = MutableStateFlow(false)
     val isSearching = _isSearching.asStateFlow()
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery = _searchQuery.asStateFlow()
+
     init {
         observeLocalData()
         fetchNextPage()
+        observeSearchQuery()
     }
-
     private fun observeLocalData() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getRecalls()
@@ -62,6 +69,23 @@ class ProductListViewModel(
                 _isLoadingMore.value = false
             }
         }
+    }
+
+
+    private fun observeSearchQuery() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _searchQuery
+                .debounce(500)
+                .distinctUntilChanged()
+                .collect { query ->
+                    search(query)
+                }
+        }
+    }
+
+
+    fun onSearchQueryChanged(query: String) {
+        _searchQuery.value = query
     }
 
     fun search(query: String) {

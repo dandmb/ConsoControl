@@ -109,6 +109,4 @@ fun ProductListContent(
             }
         }
     }
-
-
 }
