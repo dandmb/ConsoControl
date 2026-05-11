@@ -2,6 +2,7 @@ package com.dmb25.consoprotection.data.repository
 
 import com.dmb25.consoprotection.data.local.dao.ProductDao
 import com.dmb25.consoprotection.data.local.dao.SyncMetadataDao
+import com.dmb25.consoprotection.data.local.entity.ProductEntity
 import com.dmb25.consoprotection.data.local.entity.SyncMetadataEntity
 import com.dmb25.consoprotection.data.mapper.toEntity
 import com.dmb25.consoprotection.data.mapper.toModel
@@ -56,5 +57,9 @@ class RecallRepositoryImpl(
     override suspend fun searchRecalls(query: String): List<Product> {
         val response = apiService.searchRecalls(query = query)
         return response.results.map { it.toEntity().toModel() }
+    }
+
+    override suspend fun getProductById(id: Int): Product? {
+        return productDao.getById(id)?.toModel()
     }
 }

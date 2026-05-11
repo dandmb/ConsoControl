@@ -27,7 +27,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dmb25.consoprotection.data.remote.dto.ProductDto
 import com.dmb25.consoprotection.domain.model.Product
 import kotlinx.coroutines.launch
 
@@ -36,6 +35,7 @@ fun ProductListContent(
     product: List<Product>,
     isLoadingMore: Boolean,
     onLoadMore: () -> Unit,
+    onProductClick: (Int) -> Unit
 ) {
     val listState = rememberLazyListState()
     val scope = rememberCoroutineScope()
@@ -71,6 +71,9 @@ fun ProductListContent(
             items(product) { product ->
                 ProductItem(
                     product = product,
+                    onProductClick = {
+                        onProductClick(it)
+                    }
                 )
             }
 

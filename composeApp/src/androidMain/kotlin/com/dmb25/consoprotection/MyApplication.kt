@@ -6,12 +6,14 @@ import com.dmb25.consoprotection.di.dataModule
 import com.dmb25.consoprotection.di.domainModule
 import com.dmb25.consoprotection.di.presentationModule
 import com.dmb25.consoprotection.di.sharedModule
+import com.dmb25.consoprotection.presentation.utils.application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        application = this
         startKoin {
             androidContext(this@MyApplication)
             modules(sharedModule, dataModule, presentationModule, domainModule, androidDatabaseModule)

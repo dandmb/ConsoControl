@@ -9,6 +9,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.dmb25.consoprotection.presentation.theme.AppTheme
+import com.dmb25.consoprotection.presentation.ui.navigation.MainNavigationDestination
+import com.dmb25.consoprotection.presentation.ui.navigation.MainNavigationHost
 import com.dmb25.consoprotection.presentation.ui.product_list.ProductListScreen
 
 import consoprotection.composeapp.generated.resources.Res
@@ -21,18 +23,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun App() {
     AppTheme {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = {
-                        Text(text = stringResource(Res.string.title))
-                    }
-                )
-            }
-        ) { innerPadding ->
-            Box(modifier = Modifier.padding(innerPadding)) {
-                ProductListScreen()
-            }
-        }
+        MainNavigationHost()
     }
 }
