@@ -6,6 +6,7 @@ import com.dmb25.consoprotection.data.local.entity.SyncMetadataEntity
 import com.dmb25.consoprotection.data.mapper.toEntity
 import com.dmb25.consoprotection.data.mapper.toModel
 import com.dmb25.consoprotection.data.remote.ApiService
+import com.dmb25.consoprotection.data.remote.dto.RecallResponseDto
 import com.dmb25.consoprotection.domain.model.Product
 import com.dmb25.consoprotection.domain.repository.RecallRepository
 import kotlinx.coroutines.flow.Flow
@@ -52,9 +53,7 @@ class RecallRepositoryImpl(
 
     override suspend fun fetchAndSave(offset: Int) {
         val response = apiService.getRecalls(limit = 20, offset = offset)
-        val entities = response.results.map { it.toEntity() }
-        productDao.insertAll(entities)
-        syncMetadataDao.incrementLocalCount(entities.size)
+        updateLocalDatabase(response)
     }
 
     override suspend fun canLoadMore(): Boolean {
@@ -68,10 +67,17 @@ class RecallRepositoryImpl(
 
     override suspend fun searchRecalls(query: String): List<Product> {
         val response = apiService.searchRecalls(query = query)
+        updateLocalDatabase(response)
         return response.results.map { it.toEntity().toModel() }
     }
 
     override suspend fun getProductById(id: Int): Product? {
         return productDao.getById(id)?.toModel()
+    }
+
+    private suspend fun updateLocalDatabase(response : RecallResponseDto){
+        val entities = response.results.map { it.toEntity() }
+        productDao.insertAll(entities)
+        syncMetadataDao.incrementLocalCount(entities.size)
     }
 }

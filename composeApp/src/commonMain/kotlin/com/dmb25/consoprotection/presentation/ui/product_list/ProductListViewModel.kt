@@ -87,6 +87,7 @@ class ProductListViewModel(
     }
     private fun observeLocalData() {
         viewModelScope.launch(Dispatchers.IO) {
+            _uiState.value = UiState.Loading
             repository.getRecalls()
                 .collect { products ->
                     if (products.isEmpty()) {
