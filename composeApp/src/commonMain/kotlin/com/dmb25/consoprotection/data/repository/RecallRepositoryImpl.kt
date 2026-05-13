@@ -2,7 +2,6 @@ package com.dmb25.consoprotection.data.repository
 
 import com.dmb25.consoprotection.data.local.dao.ProductDao
 import com.dmb25.consoprotection.data.local.dao.SyncMetadataDao
-import com.dmb25.consoprotection.data.local.entity.ProductEntity
 import com.dmb25.consoprotection.data.local.entity.SyncMetadataEntity
 import com.dmb25.consoprotection.data.mapper.toEntity
 import com.dmb25.consoprotection.data.mapper.toModel
@@ -11,6 +10,7 @@ import com.dmb25.consoprotection.domain.model.Product
 import com.dmb25.consoprotection.domain.repository.RecallRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 
 class RecallRepositoryImpl(
     private val apiService: ApiService,
@@ -19,30 +19,42 @@ class RecallRepositoryImpl(
 ) : RecallRepository {
 
     override fun getRecalls(): Flow<List<Product>> {
-        return productDao.getAll().map { entities ->
-            entities.map {
-                it.toModel()
+        return productDao.getAll()
+            .map { entities -> entities.map { it.toModel() } }
+            .onStart { refresh() }
+    }
+
+    private suspend fun refresh() {
+        try {
+            val response = apiService.getRecalls(limit = 20, offset = 0)
+            val entities = response.results.map { it.toEntity() }
+            productDao.insertAll(entities)
+
+            val metadata = syncMetadataDao.get()
+            if (metadata == null) {
+                syncMetadataDao.upsert(
+                    SyncMetadataEntity(
+                        totalRemoteCount = response.totalCount,
+                        totalLocalCount = entities.size
+                    )
+                )
+            } else {
+                syncMetadataDao.upsert(
+                    metadata.copy(
+                        totalRemoteCount = response.totalCount,
+                    )
+                )
             }
+        } catch (e: Exception) {
+            // si erreur réseau, le Flow continue avec les données locales
         }
     }
 
     override suspend fun fetchAndSave(offset: Int) {
         val response = apiService.getRecalls(limit = 20, offset = offset)
-
         val entities = response.results.map { it.toEntity() }
         productDao.insertAll(entities)
-
-        val metadata = syncMetadataDao.get()
-        if (metadata == null) {
-            syncMetadataDao.upsert(
-                SyncMetadataEntity(
-                    totalRemoteCount = response.totalCount,
-                    totalLocalCount = entities.size
-                )
-            )
-        } else {
-            syncMetadataDao.incrementLocalCount(entities.size)
-        }
+        syncMetadataDao.incrementLocalCount(entities.size)
     }
 
     override suspend fun canLoadMore(): Boolean {

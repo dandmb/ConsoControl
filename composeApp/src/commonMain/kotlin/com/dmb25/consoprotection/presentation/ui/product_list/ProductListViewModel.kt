@@ -83,7 +83,6 @@ class ProductListViewModel(
 
     init {
         observeLocalData()
-        fetchNextPage()
         observeSearchQuery()
     }
     private fun observeLocalData() {
