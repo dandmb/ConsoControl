@@ -9,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.dmb25.consoprotection.presentation.ui.product_detail.ProductDetailsScreen
 import com.dmb25.consoprotection.presentation.ui.product_list.ProductListScreen
-import com.dmb25.consoprotection.presentation.ui.qrscan.ScannerScreen
+import com.dmb25.consoprotection.presentation.ui.codescan.ScannerScreen
 
 @Composable
 fun MainNavigationHost() {

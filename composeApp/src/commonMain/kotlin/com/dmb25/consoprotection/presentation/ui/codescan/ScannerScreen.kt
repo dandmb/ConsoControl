@@ -1,4 +1,4 @@
-package com.dmb25.consoprotection.presentation.ui.qrscan
+package com.dmb25.consoprotection.presentation.ui.codescan
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

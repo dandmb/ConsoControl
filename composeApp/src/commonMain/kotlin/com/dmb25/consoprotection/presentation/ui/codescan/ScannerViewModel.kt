@@ -1,4 +1,4 @@
-package com.dmb25.consoprotection.presentation.ui.qrscan
+package com.dmb25.consoprotection.presentation.ui.codescan
 
 import androidx.lifecycle.ViewModel
 import com.dmb25.consoprotection.domain.repository.RecallRepository

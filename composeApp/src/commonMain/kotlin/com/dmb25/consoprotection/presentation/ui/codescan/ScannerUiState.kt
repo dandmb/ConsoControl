@@ -1,4 +1,4 @@
-package com.dmb25.consoprotection.presentation.ui.qrscan
+package com.dmb25.consoprotection.presentation.ui.codescan
 
 sealed class ScannerUiState{
     object Loading : ScannerUiState()
