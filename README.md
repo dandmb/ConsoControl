@@ -23,7 +23,7 @@ Application mobile Kotlin Multiplatform permettant de consulter les rappels prod
   <li>🌙 Mode sombre</li>
   <li>🔄 Synchronisation avec l’API officielle</li>
   <li>🧩 Architecture propre et modulaire</li>
-  <li>📷 Scanner un produit</li>
+  <li>📷 Scanner le code barre d'un produit</li>
 </ul>
 
 ---
