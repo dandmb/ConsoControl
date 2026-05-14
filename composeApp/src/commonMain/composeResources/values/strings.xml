@@ -3,4 +3,8 @@
   <string name="title">Produits Rappelés</string>
   <string name="retry">Réessayer</string>
   <string name="search_product">Rechercher un produit...</string>
+
+  <string name="read_more_at">Voir plus sur %1$s</string>
+  <string name="back_content_description">Back</string>
+  <string name="share_content_description">Share</string>
 </resources>

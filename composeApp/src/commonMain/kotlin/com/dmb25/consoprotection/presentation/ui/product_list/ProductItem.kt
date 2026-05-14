@@ -28,9 +28,14 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun ProductItem(
     product: Product,
+    modifier: Modifier = Modifier,
+    onProductClick: (Int) -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        onClick = {
+            onProductClick(product.id)
+        }
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),

@@ -11,8 +11,13 @@ import kotlinx.coroutines.launch
 
 import com.dmb25.consoprotection.domain.model.Product
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.stateIn
+import kotlin.collections.emptyList
 
 @OptIn(FlowPreview::class)
 class ProductListViewModel(
@@ -34,13 +39,55 @@ class ProductListViewModel(
     private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
 
+
+    private val _selectedCategory = MutableStateFlow<String?>(null)
+    val selectedCategory = _selectedCategory.asStateFlow()
+
+    val categories: StateFlow<List<String>> = combine(
+        _uiState, _searchResults, _searchQuery
+    ) { state, searchResults, query ->
+        if (query.isNotBlank()) {
+            searchResults.map { it.categorieProduit }.distinct().sorted()
+        } else if (state is UiState.Success) {
+            state.data.map { it.categorieProduit }.distinct().sorted()
+        } else emptyList()
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
+
+    val filteredProducts: StateFlow<List<Product>> = combine(
+        _uiState, _selectedCategory, _searchResults, _searchQuery
+    ) { state, category, searchResults, query ->
+        val baseList = if (query.isNotBlank()) searchResults
+        else if (state is UiState.Success) state.data
+        else emptyList()
+
+        if (category != null) {
+            baseList.filter { it.categorieProduit == category }
+        } else {
+            baseList
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
+
+
+    fun onCategorySelected(category: String?) {
+        _selectedCategory.value = if (_selectedCategory.value == category) null else category
+    }
+
+
     init {
         observeLocalData()
-        fetchNextPage()
         observeSearchQuery()
     }
     private fun observeLocalData() {
         viewModelScope.launch(Dispatchers.IO) {
+            _uiState.value = UiState.Loading
             repository.getRecalls()
                 .collect { products ->
                     if (products.isEmpty()) {
@@ -94,6 +141,7 @@ class ProductListViewModel(
             _isSearching.value = false
             return
         }
+        _selectedCategory.value = null
         viewModelScope.launch(Dispatchers.IO) {
             _isSearching.value = true
             try {

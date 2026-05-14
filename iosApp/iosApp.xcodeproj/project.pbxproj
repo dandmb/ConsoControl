@@ -21,17 +21,17 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		55C3E782E1E158913504CE7D /* Configuration */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		9F26F82BD1AED44E39FF9C3F /* iosApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				911824BD3F4615C1E27F6E7B /* Exceptions for "iosApp" folder in "iosApp" target */,
 			);
 			path = iosApp;
-			sourceTree = "<group>";
-		};
-		55C3E782E1E158913504CE7D /* Configuration */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -47,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3AEE1B2719C2BD9AA72F5530 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8B73EA329B2B44B62C8FC656 /* ConsoProtection.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CA6A258BE60FD1B35E054084 = {
 			isa = PBXGroup;
 			children = (
@@ -54,14 +62,6 @@
 				9F26F82BD1AED44E39FF9C3F /* iosApp */,
 				3AEE1B2719C2BD9AA72F5530 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		3AEE1B2719C2BD9AA72F5530 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8B73EA329B2B44B62C8FC656 /* ConsoProtection.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,7 +299,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "${TEAM_ID}";
+				DEVELOPMENT_TEAM = UXH9VPYT95;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
@@ -327,7 +327,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "${TEAM_ID}";
+				DEVELOPMENT_TEAM = UXH9VPYT95;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
