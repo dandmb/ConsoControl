@@ -50,5 +50,14 @@ class ApiService(
         }.body()
     }
 
+    suspend fun getProductByGtin(gtin: Long): RecallResponseDto {
+        return httpClient.get("rappelconso-v2-gtin-trie/records") {
+            url {
+                encodedParameters.append("where", "gtin=$gtin".encodeURLParameter())
+                encodedParameters.append("limit", "1")
+            }
+        }.body()
+    }
+
 
 }
