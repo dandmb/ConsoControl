@@ -75,6 +75,12 @@ class RecallRepositoryImpl(
         return productDao.getById(id)?.toModel()
     }
 
+    override suspend fun getProductByGtin(gtin: Long): Product? {
+        val response = apiService.getProductByGtin(gtin)
+        updateLocalDatabase(response)
+        return response.results.firstOrNull()?.toEntity()?.toModel()
+    }
+
     private suspend fun updateLocalDatabase(response : RecallResponseDto){
         val entities = response.results.map { it.toEntity() }
         productDao.insertAll(entities)

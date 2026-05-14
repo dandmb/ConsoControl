@@ -3,6 +3,7 @@ package com.dmb25.consoprotection.presentation.utils
 import android.content.Intent
 import android.net.Uri
 import android.app.Application
+import androidx.activity.ComponentActivity
 
 lateinit var application: Application
 

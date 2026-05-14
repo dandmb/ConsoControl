@@ -11,4 +11,6 @@ interface RecallRepository {
     suspend fun getCurrentOffset(): Int
     suspend fun searchRecalls(query: String): List<Product>
     suspend fun getProductById(id: Int) : Product?
+
+    suspend fun getProductByGtin(gtin: Long): Product?
 }

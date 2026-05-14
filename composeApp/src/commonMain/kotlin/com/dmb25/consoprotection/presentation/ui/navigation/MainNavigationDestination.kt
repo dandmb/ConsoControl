@@ -3,6 +3,8 @@ import kotlinx.serialization.Serializable
 
 sealed interface MainNavigationDestination {
     @Serializable
+    data object Scanner : MainNavigationDestination
+    @Serializable
     data object Home : MainNavigationDestination
     @Serializable
     data class Details(val productId: Int) : MainNavigationDestination

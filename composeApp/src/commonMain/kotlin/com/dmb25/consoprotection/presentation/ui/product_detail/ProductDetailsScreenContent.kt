@@ -38,7 +38,6 @@ fun ProductDetailsScreenContent(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text("")
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {

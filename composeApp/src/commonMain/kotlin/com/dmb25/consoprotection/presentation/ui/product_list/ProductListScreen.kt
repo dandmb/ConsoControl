@@ -46,7 +46,8 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 internal fun ProductListScreen(
     viewModel: ProductListViewModel = koinViewModel(),
-    onProductClick: (Int) -> Unit
+    onProductClick: (Int) -> Unit,
+    onScanClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val isLoadingMore by viewModel.isLoadingMore.collectAsStateWithLifecycle()
@@ -148,7 +149,8 @@ internal fun ProductListScreen(
                                         onLoadMore = { viewModel.fetchNextPage() },
                                         onProductClick = {
                                             onProductClick(it)
-                                        }
+                                        },
+                                        onScanClick = onScanClick
                                     )
                                 }
 
