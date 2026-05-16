@@ -87,7 +87,10 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.turbine)
-            implementation(libs.mockk.common)
+            implementation(libs.kotlinx.coroutines.test)
+        }
+        androidUnitTest.dependencies {
+            implementation(libs.mockk)
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
