@@ -31,51 +31,65 @@ fun ProductItem(
     modifier: Modifier = Modifier,
     onProductClick: (Int) -> Unit
 ) {
+
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
         onClick = {
             onProductClick(product.id)
         }
     ) {
+
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            AsyncImage(
-                model = product.images[0],
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                placeholder = painterResource(Res.drawable.compose_multiplatform),
-                error = painterResource(Res.drawable.compose_multiplatform),
-                modifier = Modifier
-                    .height(150.dp)
-                    .weight(1f)
-                    .padding(8.dp)
-                    .clip(RoundedCornerShape(12.dp))
 
+            AsyncImage(
+                model = product.images.firstOrNull(),
+                contentDescription = product.libelle,
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(
+                    Res.drawable.compose_multiplatform
+                ),
+                error = painterResource(
+                    Res.drawable.compose_multiplatform
+                ),
+                modifier = Modifier
+                    .height(140.dp)
+                    .weight(1f)
+                    .clip(RoundedCornerShape(16.dp))
             )
+
             Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.weight(2f).padding(8.dp),
+                modifier = Modifier
+                    .weight(2f)
+                    .padding(start = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
+
                 Text(
                     text = product.libelle.uppercase(),
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleLarge,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
+
                 Text(
                     text = product.motifRappel,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.error,
-                    maxLines = 2,
+                    maxLines = 3,
                     overflow = TextOverflow.Ellipsis
                 )
+
                 Text(
                     text = product.datePublication,
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
